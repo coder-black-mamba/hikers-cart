@@ -4,6 +4,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 // internal imports
 import { errorHandler, notFoundHandler } from './middlewares/common/errorHandler.js';
+import adminRouter from './routes/admin.js';
 import authRouter from './routes/auth.js';
 // initializing the dotenv
 dotenv.config();
@@ -27,7 +28,8 @@ app.use(express.static('./public'));
 
 // routing setup
 app.use('/auth', authRouter);
-
+// adding admin router
+app.use('/admin', adminRouter);
 // 404 not found handler
 app.use(notFoundHandler);
 
