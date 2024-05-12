@@ -6,7 +6,7 @@ const CategorySchema = new Schema({
         required: true,
         unique: true,
     },
-    details: String,
+    description: String,
 });
 
 export default CategorySchema;

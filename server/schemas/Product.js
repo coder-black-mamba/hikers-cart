@@ -30,6 +30,9 @@ const ProductSchema = new Schema(
             type: Number,
             required: true,
         },
+        sold: {
+            type: Number,
+        },
         brand: {
             type: String,
             required: true,
