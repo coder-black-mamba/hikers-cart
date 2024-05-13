@@ -48,7 +48,6 @@ const ProductSchema = new Schema(
         },
         material: {
             type: String,
-            required: true,
         },
         technical_specification: {
             type: String,

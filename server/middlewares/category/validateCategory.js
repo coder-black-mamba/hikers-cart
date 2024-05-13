@@ -2,7 +2,7 @@ import { check, validationResult } from 'express-validator';
 
 export const validatorChecks = [
     check('name')
-        .isLength({ min: 5, max: 15 })
+        .isLength({ min: 3, max: 15 })
         .isAlpha()
         .trim()
         .withMessage('category length must be between 5-15'),

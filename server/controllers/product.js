@@ -1,10 +1,14 @@
+import Product from '../models/Product.js';
+
 export const getAllProduct = async (req, res) => {
     try {
         // Controller logic goes here
+        const products = await Product.find();
 
         return res.status(200).json({
             message: 'successfully got all products',
             status: 200,
+            products,
             // Add data to response here
         });
     } catch (error) {
@@ -19,10 +23,17 @@ export const getAllProduct = async (req, res) => {
 export const getProductById = async (req, res) => {
     try {
         // Controller logic goes here
-
+        const product = await Product.findById(req.params.id);
+        if (!product) {
+            return res.status(404).json({
+                message: 'Product not found',
+                status: 404,
+            });
+        }
         return res.status(200).json({
             message: 'success message',
             status: 200,
+            product,
             // Add data to response here
         });
     } catch (error) {
@@ -37,10 +48,11 @@ export const getProductById = async (req, res) => {
 export const createProduct = async (req, res) => {
     try {
         // Controller logic goes here
-
+        const product = await Product.create(req.body);
         return res.status(200).json({
             message: 'success message',
             status: 200,
+            product,
             // Add data to response here
         });
     } catch (error) {
@@ -55,10 +67,21 @@ export const createProduct = async (req, res) => {
 export const updateProduct = async (req, res) => {
     try {
         // Controller logic goes here
-
+        // check if product exists
+        const product = await Product.findById(req.params.id);
+        if (!product) {
+            return res.status(404).json({
+                message: 'Product not found',
+                status: 404,
+            });
+        }
+        const updatedProduct = await Product.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,
+        });
         return res.status(200).json({
-            message: 'success message',
+            message: 'successfully updated product',
             status: 200,
+            product: updatedProduct,
             // Add data to response here
         });
     } catch (error) {
@@ -73,10 +96,19 @@ export const updateProduct = async (req, res) => {
 export const deleteProduct = async (req, res) => {
     try {
         // Controller logic goes here
-
+        // check if product exists
+        const product = await Product.findById(req.params.id);
+        if (!product) {
+            return res.status(404).json({
+                message: 'Product not found',
+                status: 404,
+            });
+        }
+        const deletedProduct = await Product.findByIdAndDelete(req.params.id);
         return res.status(200).json({
-            message: 'success message',
+            message: 'successfullt deleted product',
             status: 200,
+            product: deletedProduct,
             // Add data to response here
         });
     } catch (error) {
